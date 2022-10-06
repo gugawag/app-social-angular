@@ -1,0 +1,7 @@
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item [routerLink]="['/listagemusuarios']">Listar Usuários</button>
+  <button mat-menu-item [routerLink]="['/cadastrousuario']">Cadastrar Usuário</button>
+  <button mat-menu-item [routerLink]="['/cadastrolistausuarios']">Cadastrar/Listagem Usuários</button>
+</mat-menu>

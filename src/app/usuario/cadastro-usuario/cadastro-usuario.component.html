@@ -1,0 +1,23 @@
+<h1>Cadastro</h1>
+
+
+<mat-card class="card-cadastro">
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput [(ngModel)]="usuarioAtual.id" placeholder="Nome do usuário">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Idade</mat-label>
+      <input matInput [(ngModel)]="usuarioAtual.idade">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="usuarioAtual.nome"><br>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button (click)="inserirUsuario()">Inserir</button>
+  </mat-card-actions>
+</mat-card>
