@@ -13,6 +13,7 @@ import {MatInputModule} from '@angular/material/input';
 import {FlexModule} from '@angular/flex-layout';
 import { CadastroListagemComponent } from './cadastro-listagem/cadastro-listagem.component';
 import {RouterModule} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 
 
 
@@ -33,7 +34,8 @@ import {RouterModule} from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     FlexModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports: [
     CadastroUsuarioComponent,

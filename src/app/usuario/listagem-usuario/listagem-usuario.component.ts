@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {USUARIOS} from '../../shared/modelo/USUARIOS';
 import {Usuario} from '../../shared/modelo/usuario';
 import {Router} from '@angular/router';
+import {UsuarioService} from '../../shared/servicos/usuario.service';
 
 @Component({
   selector: 'app-listagem-usuario',
@@ -10,18 +11,30 @@ import {Router} from '@angular/router';
 })
 export class ListagemUsuarioComponent implements OnInit {
 
-  usuarios = USUARIOS;
+  usuarios: Usuario[];
 
-  constructor(private roteador: Router) { }
+  constructor(private roteador: Router, private usuarioService: UsuarioService) {
+    this.usuarios = new Array<Usuario>();
+  }
 
   ngOnInit(): void {
+    this.usuarioService.listar().subscribe(
+      usuariosRetornados => this.usuarios = usuariosRetornados
+    );
   }
 
   removerUsuario(usuarioARemover: Usuario): void {
-    const indx = this.usuarios.findIndex(usuario => usuario.id === usuarioARemover.id);
-    if (indx > -1) {
-      this.usuarios.splice(indx, 1);
-    }
+    this.usuarioService.apagar(usuarioARemover.id).subscribe(
+      removido => {
+        console.log(removido);
+        const indxUsuario = this.usuarios.findIndex(u => u.id === usuarioARemover.id);
+
+        if (indxUsuario > -1) {
+          this.usuarios.splice(indxUsuario, 1);
+        }
+
+      }
+    );
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {USUARIOS} from '../../shared/modelo/USUARIOS';
 import {Usuario} from '../../shared/modelo/usuario';
 import {ActivatedRoute} from '@angular/router';
+import {UsuarioService} from '../../shared/servicos/usuario.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -10,27 +11,42 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CadastroUsuarioComponent implements OnInit {
 
-  usuarios = USUARIOS;
   usuarioAtual: Usuario;
 
-  constructor(private rotaAtual: ActivatedRoute) {
+  inserindo = true;
+  nomeBotao = 'Inserir';
+
+  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioService) {
     this.usuarioAtual = new Usuario('', 0, '');
     if (rotaAtual.snapshot.paramMap.has('id')) {
       const idParaEdicao = rotaAtual.snapshot.paramMap.get('id');
-      const usuarioEncontrado = this.usuarios.find(usuario => usuario.id === idParaEdicao);
-      if (usuarioEncontrado) {
-        this.usuarioAtual = usuarioEncontrado;
+      if (idParaEdicao) {
+        this.inserindo = false;
+        this.nomeBotao = 'Atualizar';
+        const usuarioEncontrado = this.usuarioService.pesquisarPorId(idParaEdicao).subscribe(
+          usuarioEncontrado => this.usuarioAtual = usuarioEncontrado
+        );
       }
     }
-
   }
 
   ngOnInit() {
   }
 
-  inserirUsuario() {
-    this.usuarios.push(this.usuarioAtual);
-    this.usuarioAtual = new Usuario('', 0, '');
+  inserirOuAtualizarUsuario() {
+    if (this.inserindo) {
+      this.usuarioService.inserir(this.usuarioAtual).subscribe(
+        usuarioInserido => console.log(usuarioInserido)
+      );
+      this.usuarioAtual = new Usuario('', 0, '');
+    } else {
+      this.usuarioService.atualizar(this.usuarioAtual).subscribe(
+        usuarioAtualizado => console.log(usuarioAtualizado)
+      )
+    }
   }
 
+  atualizaNome(novoNome: string) {
+    this.usuarioAtual.nome = novoNome;
+  }
 }
