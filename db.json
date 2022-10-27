@@ -8,12 +8,14 @@
     {
       "id": 2,
       "idade": "20",
-      "nome": "Paulo Pistolinha"
+      "nome": "Paulo Pistolinha",
+      "cpf": "123"
     },
     {
       "id": "a",
       "idade": "30",
-      "nome": "José"
+      "nome": "José",
+      "cpf": "12345678900"
     },
     {
       "id": 3,
@@ -34,6 +36,54 @@
       "id": 6,
       "idade": "40",
       "nome": "Paulo Feliz"
+    },
+    {
+      "id": 7,
+      "idade": "40",
+      "nome": "José",
+      "cpf": "00000000099"
+    },
+    {
+      "id": 8,
+      "idade": "30",
+      "nome": "minúsculo junior",
+      "cpf": ""
+    },
+    {
+      "id": 9,
+      "idade": 0,
+      "nome": "",
+      "cpf": "12345678900"
+    },
+    {
+      "id": 10,
+      "idade": 0,
+      "nome": "",
+      "cpf": "123"
+    },
+    {
+      "id": 11,
+      "idade": 0,
+      "nome": "",
+      "cpf": ""
+    },
+    {
+      "id": 12,
+      "idade": 0,
+      "nome": "",
+      "cpf": ""
+    },
+    {
+      "id": 13,
+      "idade": 0,
+      "nome": "",
+      "cpf": ""
+    },
+    {
+      "id": 14,
+      "idade": 0,
+      "nome": "",
+      "cpf": ""
     }
   ],
   "mensagens": []

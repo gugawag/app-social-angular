@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {USUARIOS} from '../../shared/modelo/USUARIOS';
 import {Usuario} from '../../shared/modelo/usuario';
 import {ActivatedRoute} from '@angular/router';
 import {UsuarioService} from '../../shared/servicos/usuario.service';
+import {MensagemService} from '../../shared/servicos/mensagem.service';
+import {IMensagem} from '../../shared/servicos/IMensagem';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -16,8 +17,9 @@ export class CadastroUsuarioComponent implements OnInit {
   inserindo = true;
   nomeBotao = 'Inserir';
 
-  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioService) {
-    this.usuarioAtual = new Usuario('', 0, '');
+  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioService,
+              private mensagemService: IMensagem) {
+    this.usuarioAtual = new Usuario('', 0, '', '');
     if (rotaAtual.snapshot.paramMap.has('id')) {
       const idParaEdicao = rotaAtual.snapshot.paramMap.get('id');
       if (idParaEdicao) {
@@ -36,12 +38,12 @@ export class CadastroUsuarioComponent implements OnInit {
   inserirOuAtualizarUsuario() {
     if (this.inserindo) {
       this.usuarioService.inserir(this.usuarioAtual).subscribe(
-        usuarioInserido => console.log(usuarioInserido)
+        usuarioInserido => this.mensagemService.info('Usuário cadastrado com sucesso!')
       );
-      this.usuarioAtual = new Usuario('', 0, '');
+      this.usuarioAtual = new Usuario('', 0, '', '');
     } else {
       this.usuarioService.atualizar(this.usuarioAtual).subscribe(
-        usuarioAtualizado => console.log(usuarioAtualizado)
+        usuarioAtualizado => this.mensagemService.erro('Usuário atualizado com sucesso!')
       )
     }
   }

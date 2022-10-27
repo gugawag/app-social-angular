@@ -5,12 +5,15 @@
 </p>
 
 <div fxLayout="row wrap" fxLayout.lt-md="column">
-  <mat-card fxFlex="15" *ngFor="let usuario of usuarios" class="card-usuario">
+  <mat-card fxFlex="20" *ngFor="let usuario of usuarios" class="card-usuario">
     <mat-card-header>
       <mat-icon>person</mat-icon>
       <mat-card-title>
-        {{usuario.nome}}
+        {{usuario.nome | titlecase}}
       </mat-card-title>
+      <mat-card-subtitle>
+        {{usuario.cpf | cpf}}
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       Idade: {{usuario.idade}}

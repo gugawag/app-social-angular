@@ -12,6 +12,13 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {ListagemUsuarioComponent} from './usuario/listagem-usuario/listagem-usuario.component';
 import {UsuarioModule} from './usuario/usuario.module';
 import {LayoutModule} from './layout/layout.module';
+import { environment } from '../environments/environment';
+import { CpfPipe } from './shared/pipes/cpf.pipe';
+import {PipesModule} from './shared/pipes/pipes.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {IMensagem} from './shared/servicos/IMensagem';
+import {MensagemSweetService} from './shared/servicos/mensagem-sweet.service';
+import {MensagemService} from './shared/servicos/mensagem.service';
 
 @NgModule({
   declarations: [
@@ -25,10 +32,15 @@ import {LayoutModule} from './layout/layout.module';
     MatCardModule,
     MatIconModule,
     MatBadgeModule,
+    MatSnackBarModule,
+    PipesModule,
     UsuarioModule,
-    LayoutModule
+    LayoutModule,
   ],
-  providers: [],
+  providers: [{
+    provide: IMensagem,
+    useClass: MensagemService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
