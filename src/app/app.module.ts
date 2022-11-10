@@ -19,6 +19,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {IMensagem} from './shared/servicos/IMensagem';
 import {MensagemSweetService} from './shared/servicos/mensagem-sweet.service';
 import {MensagemService} from './shared/servicos/mensagem.service';
+import {FirestoreModule} from './firestore/firestore.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MensagemService} from './shared/servicos/mensagem.service';
     PipesModule,
     UsuarioModule,
     LayoutModule,
+    FirestoreModule
   ],
   providers: [{
     provide: IMensagem,

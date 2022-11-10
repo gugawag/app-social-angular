@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UsuarioService} from '../../shared/servicos/usuario.service';
 import {MensagemService} from '../../shared/servicos/mensagem.service';
 import {IMensagem} from '../../shared/servicos/IMensagem';
+import {UsuarioFirestoreService} from '../../shared/servicos/usuario-firestore.service';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -17,9 +18,9 @@ export class CadastroUsuarioComponent implements OnInit {
   inserindo = true;
   nomeBotao = 'Inserir';
 
-  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioService,
+  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioFirestoreService,
               private mensagemService: IMensagem) {
-    this.usuarioAtual = new Usuario('', 0, '', '');
+    this.usuarioAtual = new Usuario('');
     if (rotaAtual.snapshot.paramMap.has('id')) {
       const idParaEdicao = rotaAtual.snapshot.paramMap.get('id');
       if (idParaEdicao) {
@@ -40,7 +41,7 @@ export class CadastroUsuarioComponent implements OnInit {
       this.usuarioService.inserir(this.usuarioAtual).subscribe(
         usuarioInserido => this.mensagemService.info('Usuário cadastrado com sucesso!')
       );
-      this.usuarioAtual = new Usuario('', 0, '', '');
+      this.usuarioAtual = new Usuario('');
     } else {
       this.usuarioService.atualizar(this.usuarioAtual).subscribe(
         usuarioAtualizado => this.mensagemService.erro('Usuário atualizado com sucesso!')
