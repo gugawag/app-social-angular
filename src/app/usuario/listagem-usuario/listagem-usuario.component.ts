@@ -14,7 +14,7 @@ export class ListagemUsuarioComponent implements OnInit {
   usuarios: Usuario[];
   usuariosMaioresDeIdade: Usuario[];
 
-  constructor(private roteador: Router, private usuarioService: UsuarioFirestoreService) {
+  constructor(private roteador: Router, private usuarioService: UsuarioService) {
     this.usuarios = new Array<Usuario>();
     this.usuariosMaioresDeIdade = new Array<Usuario>();
   }
@@ -23,13 +23,14 @@ export class ListagemUsuarioComponent implements OnInit {
     this.usuarioService.listar().subscribe(
       usuariosRetornados => this.usuarios = usuariosRetornados
     );
-    this.usuarioService.listarMaioresDeIdade().subscribe(
-      usuariosMaiores => this.usuariosMaioresDeIdade = usuariosMaiores
-    )
+    // this.usuarioService.listarMaioresDeIdade().subscribe(
+    //   usuariosMaiores => this.usuariosMaioresDeIdade = usuariosMaiores
+    // )
   }
 
   removerUsuario(usuarioARemover: Usuario): void {
-    this.usuarioService.apagar(usuarioARemover.id).subscribe(
+    const id = usuarioARemover.id || '';
+    this.usuarioService.apagar(id).subscribe(
       removido => {
         console.log(removido);
         const indxUsuario = this.usuarios.findIndex(u => u.id === usuarioARemover.id);

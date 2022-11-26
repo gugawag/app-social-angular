@@ -18,7 +18,7 @@ export class CadastroUsuarioComponent implements OnInit {
   inserindo = true;
   nomeBotao = 'Inserir';
 
-  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioFirestoreService,
+  constructor(private rotaAtual: ActivatedRoute, private usuarioService: UsuarioService,
               private mensagemService: IMensagem) {
     this.usuarioAtual = new Usuario('');
     if (rotaAtual.snapshot.paramMap.has('id')) {
